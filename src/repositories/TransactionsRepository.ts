@@ -28,10 +28,12 @@ class TransactionsRepository {
       (accumulator: Balance, transaction: Transaction) => {
         if (transaction.type === 'income') {
           accumulator.income += transaction.value;
-        } else if (transaction.type === 'outcome') {
+        }
+        if (transaction.type === 'outcome') {
           accumulator.outcome += transaction.value;
         }
         accumulator.total = accumulator.income - accumulator.outcome;
+        return accumulator;
       },
       {
         income: 0,
